@@ -1,5 +1,6 @@
 ﻿#include <stdio.h>
 #include<unistd.h>
+#include<stdlib.h>
 #include"threadpool.h"
 
 //任务函数
@@ -11,7 +12,7 @@ void func(int* num)
 int main()
 {
 
-    ThreadPool* pool = threadPoolCreate(4, 50);
+    ThreadPool* pool = threadPoolCreate(4, 6, 50);
     if (pool == NULL)
     {
         printf("pool error!\n");
@@ -22,6 +23,7 @@ int main()
         *num = i;
         pthreadPoolAdd(pool, func, num);
     }
-    sleep(100);
+    sleep(30);
+    pthreadPoolDestory(pool);
     return 0;
 }
